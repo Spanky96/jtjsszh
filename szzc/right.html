@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../publicResource/css/common.css" />
+		<link rel="stylesheet/less" href="./css/leftright.less">
+		<script src="../publicResource/less.min.js"></script>
+		<script src="../publicResource/jquery-1.11.2.min.js"></script>
+		<script src="../publicResource/echarts.min.js"></script>
+		<script src="../publicResource/vue.min.js"></script>
+		<script src="../publicResource/echarts-auto-tooltip.js"></script>
+		<script src="js/mixin.js"></script>
+		<script src="./js/right.js" defer></script>
+	</head>
+	<body>
+		<div id="rightApp" v-cloak class="container  righthome">
+			<div class="item" style="display: none;">
+				<div class="smalltitle">
+					审批服务
+				</div>
+				<div class="content spfw">
+					<div class="top2">
+						<div class="spitem">
+							<div>今日受理量</div>
+							<div>216</div>
+						</div>
+						<div class="spitem">
+							<div>综合受理量</div>
+							<div>216</div>
+						</div>
+					</div>
+					<div class="tongji">
+						<div class="tongjiitem" id="bjl"></div>
+						<div class="tongjiitem" id="jbl"></div>
+						<div class="tongjiitem" id="myl"></div>
+						<div class="tongjiitem" id="tjl"></div>
+					</div>
+				</div>
+			</div>
+			<div class="item" style="display: none;">
+				<div class="smalltitle">
+					网格管理
+				</div>
+				<div class="content wggl">
+					<div class="left">
+						<div>今日事件上报</div>
+						<div><span>24</span>件</div>
+						<div>累计事件总数</div>
+						<div><span>21004</span>件</div>
+					</div>
+					<div class="right" id="wggl">
+						
+					</div>
+				</div>
+			</div>
+			<div class="item" style="display: none;">
+				<div class="smalltitle">
+					综合执法
+				</div>
+				<div class="content zhzf">
+					<div class="item1">
+						<div><span>123122</span>件</div>
+						<div>累计受理案件</div>
+					</div>
+					<div class="item1">
+						<div><span>244</span>件</div>
+						<div>按期处理案件</div>
+					</div>
+					<div class="item1">
+						<div><span>100</span>%</div>
+						<div>按期处置率</div>
+					</div>
+					<div class="item1">
+						<div><span>99</span>%</div>
+						<div>处置率</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="item tall">
+				<div class="smalltitle">
+					资产总览
+				</div>
+				<div class="tags">
+					<div class="titem" :class="{active: item.active}" 
+					@click="selectTag(item)"
+					v-for="(item, index) in tags" :key="index">{{item.name}}</div>
+				</div>
+				<div class="zczl-table">
+					<div class="tr">
+						<div class="th">序号</div>
+						<div class="th main">名称</div>
+						<div class="th"></div>
+						<div class="th"></div>
+					</div>
+					<div class="tr" v-for="(item, index) in list" :key="index">
+						<div class="td">{{index + 1}}</div>
+						<div class="td main" @click="showProjectDetail(item)">{{item.name}}</div>
+						<div class="td"></div>
+						<div class="td"></div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</body>
+</html>
+</script>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="publicResource/layui/css/layui.css" />
+		<link rel="stylesheet" type="text/css" href="publicResource/css/animate.min.css" />
+		<link rel="stylesheet" type="text/css" href="publicResource/css/common.css" />
+		<link rel="stylesheet/less" type="text/css" href="commonnav/css/style.less" />
+		<script src="publicResource/jquery-1.11.2.min.js"></script>
+		<script src="publicResource/layui/layui.js"></script>
+		<script src="publicResource/less.min.js"></script>
+		<script src="publicResource/vue.min.js"></script>
+		<!-- <script src="global.js"></script> -->
+		<script src="iframepage.js"></script>
+	</head>
+	<body>
+		<div class="container " id="app" :class="{'bgindex':activeIndex==0}">
+			<div class="navtop">
+				<div class="title">
+					{{activeTitle}}
+				</div>
+			</div>
+			<img src="commonnav/img/back.png"  class="back" @click="resetpage()" v-show="activeIndex!=0">
+
+			<div class="top5" :class="{'active':midMenuActive}">
+				<div class="module" onclick="changepage('数字资产')">
+					<div>数字资产</div>
+				</div>
+				<div class="module" onclick="changepage('设计图纸')">
+					<div>设计图纸</div>
+				</div>
+				<div class="module" onclick="changepage('地质勘察')">
+					<div>地质勘察</div>
+				</div>
+				<div class="module" onclick="changepage('智慧工地')">
+					<div>智慧工地</div>
+				</div>
+				<div class="module" onclick="changepage('智慧运维')">
+					<div>智慧运维</div>
+				</div>
+			</div>
+
+			<div class="main box100" v-if="activeIndex!=-1">
+				<iframe :src="navname[activeIndex].url" v-if="navname[activeIndex].url" :class="animatemain" class="box100"></iframe>
+				<div v-else class="box100 module3 " >
+					<iframe :src="iframeleft" :class="animateleft" class="left" :style="{'width':leftwidth}"></iframe>
+					<iframe :src="iframemiddle" :class="animatemiddle" class="middle" :style="{'width':middlewidth}"></iframe>
+					<iframe :src="iframeright" :class="animateright" class="right" :style="{'width':rightwidth}"></iframe>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			var vueObj = new Vue({
+				el: '#app',
+				mixins: [],
+				data() {
+					return {
+						title: '交通建设数字化协同平台',
+						midMenuActive: false,
+						navname: allpages,
+						activeIndex: -1,
+						animateleft: '',
+						animatemiddle: '',
+						animateright: '',
+						animatemain: '',
+						iframeleft:'',
+						iframemiddle:'',
+						iframeright:'',
+						leftwidth:'',
+						rightwidth:'',
+						middlewidth:''
+					}
+				},
+				mounted() {
+					setTimeout(()=>{
+						this.midMenuActive=true;
+					},300)
+					this.resetpage()
+				},
+				computed: {
+					activeTitle() {
+						if(this.activeIndex ==-1){
+							return ""
+						}else{
+							return this.activeIndex == 0 ? this.title : this.navname[this.activeIndex].name
+						}
+						
+					}
+				},
+				methods: {
+					resetpage() {
+						this.changepageByName("数字资产");
+					},
+					showProjectDetail: function (item) {
+						this.animateleft = "fadeInRight animated";
+						this.iframeleft= './szzc/detail-left.html';
+						this.animateright = "fadeInLeft animated";
+						this.iframeright= './szzc/detail-right.html';
+						setTimeout(() => {
+							this.animateleft = "";
+							this.animateright = "";
+						}, 1000)
+					},
+					changepageByName(pagename) {
+						// if(this.navname[this.activeIndex]&&pagename==this.navname[this.activeIndex].name){
+						// 	return
+						// }
+						var index = this.navname.findIndex(obj => obj.name == pagename);
+						if (index == -1) {
+							console.log("请在iframepage配置跳转项")
+						} else {
+							this.activeIndex = index;
+							if (this.navname[index].hasOwnProperty('url')) {
+								// bounceInRight
+								this.animatemain = "slideInDown animated";
+								setTimeout(() => {
+									this.animatemain = "";
+								}, 1000)
+							} else {
+								if(this.navname[index].urlleft){
+									this.animateleft = "fadeInRight animated";
+									this.iframeleft=this.navname[index].urlleft;
+								}
+									
+								if(this.navname[index].urlmiddle){
+									this.iframemiddle=this.navname[index].urlmiddle;
+								    this.animatemiddle = "fadeIn animated";
+								}	
+									
+								if(this.navname[index].urlright){
+									this.iframeright=this.navname[index].urlright;
+									this.animateright = "fadeInLeft animated";
+								}
+								this.leftwidth=this.navname[index].leftwidth||'520px';
+								this.rightwidth=this.navname[index].rightwidth||'520px';
+								this.middlewidth=this.navname[index].middlewidth||'calc(100% - 1100px)';
+								setTimeout(() => {
+									this.animateleft = "";
+									this.animatemiddle = "";
+									this.animateright = "";
+								}, 1000)
+							}
+						}
+					},
+				},
+
+			})
+			window.changepage = function(pagename) {
+				vueObj.changepageByName(pagename)
+			}
+			layui.use(['layer'], function() {
+				window.layer = layui.layer;
+			});
+
+			window.openWindow = function(url, newwidth = "2500px", newheight = "800px", skin = "") {
+				if (!url) {
+					return
+				}
+				layer.open({
+					type: 2,
+					title: false,
+					closeBtn: 2, //不显示关闭按钮
+					skin: skin,
+					shadeClose: true,
+					shade: 0.4,
+					area: [newwidth, newheight],
+					offset: 'auto',
+					anim: 1,
+					content: [url, 'yes'], //iframe的url，no代表不显示滚动条
+					end: function() {
+
+					}
+				})
+			}
+			// 图片地址逗号隔开
+			window.previewImg = function(imgurl) {
+				var imgarr = imgurl.split(",");
+				var data = [];
+				for (var i = 0; i < imgarr.length; i++) {
+					data[i] = {
+						"alt": "",
+						"pid": i, //图片id
+						"src": imgarr[i], //原图地址
+						"thumb": "" //缩略图地址
+					}
+				}
+				var json = {
+					"title": "", //相册标题
+					"id": 123, //相册id
+					"start": 0, //初始显示的图片序号，默认0
+					"data": data
+				}
+				layer.photos({
+					photos: json,
+					anim: 5, //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+					move: false
+				});
+			}
+			function getQueryString(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+				var r = window.location.search.substr(1).match(reg);
+				if (r != null) return decodeURI(r[2]);
+				return null;
+			}
+		</script>
+
+	</body>
+</html>

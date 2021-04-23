@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../publicResource/css/common.css" />
+		<link rel="stylesheet/less" href="./css/leftright.less">
+		<script src="../publicResource/less.min.js"></script>
+		<script src="../publicResource/jquery-1.11.2.min.js"></script>
+		<script src="../publicResource/vue.min.js"></script>
+	</head>
+	<body>
+		<div id="leftApp" v-cloak class="container lefthome">
+			<div class="item" style="flex-grow: 1;margin-bottom: 20px;">
+				<div class="smalltitle">
+					项目简介
+				</div>
+				<div class="content flex-column">
+					<div class="jjkvs">
+						<div class="jjitem">
+							<div class="key"><img src="./imgs/ziqpng.png" width="4px">功能定位：</div><div class="value">高速公路</div>
+						</div>
+						<div class="jjitem">
+							<div class="key"><img src="./imgs/ziqpng.png" width="4px">功能定位：</div><div class="value">xxx公司</div>
+						</div>
+						<div class="jjitem">
+							<div class="key"><img src="./imgs/ziqpng.png" width="4px">设计方：</div><div class="value">xxx公司</div>
+						</div>
+						<div class="jjitem">
+							<div class="key"><img src="./imgs/ziqpng.png" width="4px">施工方：</div><div class="value">xxx公司</div>
+						</div>
+						<div class="jjitem">
+							<div class="key"><img src="./imgs/ziqpng.png" width="4px">设计指标：</div><div class="value">AAA级</div>
+						</div>
+						<div class="jjitem">
+							<div class="key"><img src="./imgs/ziqpng.png" width="4px">项目投资：</div><div class="value">2.15亿元</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="item">
+				<div class="smalltitle">
+					工程结构分布
+				</div>
+				<div class="content jjzb">
+					<div class="jjjsitem ">
+						<img src="./imgs/sczc.png" alt="">
+						<div class=" jjjs-1 ">
+							<span class="y1">地区生产总值</span>
+							<div><span class="b1">39</span>
+								亿元
+							</div>
+						</div> 
+						<img src="./imgs/line1.png" alt="" class="line1">
+					</div>
+					<div class="jjjsitem ">
+						<img src="./imgs/ggys.png" alt="">
+						<div class=" jjjs-1 ">
+							<span class="y1">完成固定资产投资</span>
+							<div><span class="b1">12801</span>
+								万元
+							</div>
+						</div>
+						 <img src="./imgs/line1.png" alt="" class="line1"> 
+						 <span class="bfb">
+							比上年增长4.2%
+						</span>
+					</div>
+					<div class="jjjsitem ">
+						<img src="./imgs/gycz.png" alt="">
+							<div class=" jjjs-1 ">
+								<span class="y1">工业固定资产投额完成</span>
+								<div>
+									<span class="b1">864</span>
+									万元
+								</div>
+							</div> 
+							<img src="./imgs/line1.png" alt="" class="line1">
+							<span class="bfb">
+								比上年增长4.2%
+							</span>
+						</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
+<script>
+var  leftApp=new Vue({
+    el: '#rightApp',
+    data(){
+      return {
+		  
+	  }
+    },
+	mounted() {
+	 
+	},
+    methods: {
+        
+    },
+ });
+  
+</script>

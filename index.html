@@ -23,7 +23,8 @@
 			</div>
 			<img src="commonnav/img/back.png"  class="back" @click="resetpage()" v-show="activeIndex!=0">
 
-			<div class="top5" :class="{'active':midMenuActive}">
+			<div id="traget" @click="hideAll=!hideAll"><img src="commonnav/img/target.png" alt=""></div>
+			<div class="top5" :class="{'active':midMenuActive, hide: hideAll}">
 				<div class="module" onclick="changepage('数字资产')">
 					<div>数字资产</div>
 				</div>
@@ -44,9 +45,9 @@
 			<div class="main box100" v-if="activeIndex!=-1">
 				<iframe :src="navname[activeIndex].url" v-if="navname[activeIndex].url" :class="animatemain" class="box100"></iframe>
 				<div v-else class="box100 module3 " >
-					<iframe :src="iframeleft" :class="animateleft" class="left" :style="{'width':leftwidth}"></iframe>
+					<iframe :src="iframeleft" :class="[animateleft,{hide: hideAll}]" class="left" :style="{'width':leftwidth}"></iframe>
 					<iframe :src="iframemiddle" :class="animatemiddle" class="middle" :style="{'width':middlewidth}"></iframe>
-					<iframe :src="iframeright" :class="animateright" class="right" :style="{'width':rightwidth}"></iframe>
+					<iframe :src="iframeright" :class="[animateright,{hide: hideAll}]" class="right" :style="{'width':rightwidth}"></iframe>
 				</div>
 			</div>
 		</div>
@@ -60,6 +61,7 @@
 						title: '交通建设数字化协同平台',
 						midMenuActive: false,
 						navname: allpages,
+						hideAll: false,
 						activeIndex: -1,
 						animateleft: '',
 						animatemiddle: '',
@@ -125,8 +127,10 @@
 								}
 									
 								if(this.navname[index].urlmiddle){
-									this.iframemiddle=this.navname[index].urlmiddle;
-								    this.animatemiddle = "fadeIn animated";
+									if (this.iframemiddle!=this.navname[index].urlmiddle) {
+										this.iframemiddle=this.navname[index].urlmiddle;
+								    	this.animatemiddle = "fadeIn animated";
+									}
 								}	
 									
 								if(this.navname[index].urlright){
@@ -135,7 +139,7 @@
 								}
 								this.leftwidth=this.navname[index].leftwidth||'520px';
 								this.rightwidth=this.navname[index].rightwidth||'520px';
-								this.middlewidth=this.navname[index].middlewidth||'calc(100% - 1100px)';
+								this.middlewidth=this.navname[index].middlewidth || '';
 								setTimeout(() => {
 									this.animateleft = "";
 									this.animatemiddle = "";

@@ -74,13 +74,24 @@ iframe{
 			}
 			.left{
 				width: 520px;
+				z-index: 1;
+				transition: transform linear 500ms;
+				&.hide {
+					transform: translateX(-600px);
+				}
 			}
 			.middle{
-				width:calc(100% - 1100px);
-				z-index: 999;
+				width: 100vw;
+				position: absolute;
+				left: 0;
 			}
 			.right{
 				width: 520px;
+				z-index: 1;
+				transition: transform linear 500ms;
+				&.hide {
+					transform: translateX(600px);
+				}
 			}
 		}
 	}
@@ -98,6 +109,10 @@ iframe{
 	perspective: 1000px;
 	transform-style: preserve-3d;
 	transform:scale(0.75);
+	transition: transform linear 500ms;
+	&.hide {
+		transform: scale(0.75) translateY(-370px);
+	}
 	.module{
 		opacity: 0;
 		transition: all 1s;
@@ -182,4 +197,12 @@ iframe{
 		}
 		
 	}
+}
+
+#traget {
+	position: absolute;
+	right: 0;
+	z-index: 10000;
+	top: 60px;
+	cursor: pointer;
 }

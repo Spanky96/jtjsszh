@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../publicResource/css/common.css" />
+		<link rel="stylesheet/less" href="./css/subpage.less">
+		<script src="../publicResource/less.min.js"></script>
+		<script src="../publicResource/jquery-1.11.2.min.js"></script>
+		<script src="../publicResource/echarts.min.js"></script>
+		<script src="../publicResource/vue.min.js"></script>
+		<script src="../publicResource/echarts-auto-tooltip.js"></script>
+		<script src="./js/left.js" defer></script>
+	</head>
+	<body>
+		<div id="leftApp" v-cloak class="container lefthome">
+			<div class="item item1">
+				<div class="smalltitle">
+					<div class="nt">
+						<span class="num">01</span>
+						<span class="txt">项目信息</span>
+					</div>
+					<div class="n2"><div class="b b1"></div><div class="b b2"></div><div class="b b3"></div></div>
+				</div>
+				<div class="content">
+					<div class="jjkvs">
+						<div class="jjitem">
+							<div class="key">功能定位：</div><div class="value"></div>
+						</div>
+						<div class="jjitem">
+							<div class="key">业主方：</div><div class="value"></div>
+						</div>
+						<div class="jjitem">
+							<div class="key">设计方：</div><div class="value"></div>
+						</div>
+						<div class="jjitem">
+							<div class="key">施工方：</div><div class="value"></div>
+						</div>
+						<div class="jjitem">
+							<div class="key">设计指标：</div><div class="value"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="item item2">
+				<div class="smalltitle">
+					<div class="nt">
+						<span class="num">02</span>
+						<span class="txt">项目进度</span>
+					</div>
+					<div class="n2"><div class="b b1"></div><div class="b b2"></div><div class="b b3"></div></div>
+				</div>
+				<div class="content" style="margin: 0;">
+					<div id="chart-gcjd" style="width: 100%;height: 100%;"></div>
+				</div>
+			</div>
+			<div class="item item3">
+				<div class="smalltitle">
+					<div class="nt">
+						<span class="num">03</span>
+						<span class="txt">工点开完工比例</span>
+					</div>
+					<div class="n2"><div class="b b1"></div><div class="b b2"></div><div class="b b3"></div></div>
+				</div>
+				<div class="content">
+					<div class="desc">
+						你的描述内容，还可以显示两行文字描述内容呢。还能加一行文字描述内容，我继续加描述加到满为止继续加继续...
+					</div>
+					<div class="zb">
+						<div class="number">2021</div>
+						<div class="txt">数据名称占比<span class="ext">71%</span></div>
+						<div class="kuohu"></div>
+						<div class="n2"><div class="b b1"></div><div class="b b2"></div><div class="b b3"></div></div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</body>
+
+	<script>
+		function renderItem (item) {
+			for (let i = 1; i <= 8; i++) {
+				let dom = $(`<div class="len len${i}"></div>`);
+				if (i <= 4) {
+					dom.css('width', (15 + Math.random() * 15) + 'px');
+					dom.css('height', '2px');
+				} else {
+					dom.css('height', (15 + Math.random() * 15) + 'px');
+					dom.css('width', '2px');
+				}
+				item.append(dom);
+			}
+		}
+		renderItem($('.item1'));
+		renderItem($('.item2'));
+		renderItem($('.item3'));
+	</script>
+</html>
+</script>

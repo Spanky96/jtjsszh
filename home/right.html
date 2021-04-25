@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../publicResource/css/common.css" />
+		<link rel="stylesheet/less" href="./css/subpage.less">
+		<script src="../publicResource/less.min.js"></script>
+		<script src="../publicResource/jquery-1.11.2.min.js"></script>
+		<script src="../publicResource/vue.min.js"></script>
+	</head>
+	<body>
+		<div id="rightApp" v-cloak class="container righthome">
+			<div class="item item1">
+				<div class="smalltitle2">
+					工程结构分布
+				</div>
+			</div>
+			<div class="item item2">
+				<div class="smalltitle2">
+					重点地址信息
+				</div>
+				<div class="smalltitle3">
+					桥梁工程数据
+				</div>
+			</div>
+			<div class="item item3">
+				<div class="smalltitle2">
+					重点节点信息
+				</div>
+				<div class="content">
+					<div class="zczl-table">
+						<div class="tr">
+							<div class="th" style="width: 20%">序号</div>
+							<div class="th main">名称</div>
+							<div class="th" style="width: 20%">类型</div>
+						</div>
+						<div class="tr" v-for="(item, index) in list" :key="index">
+							<div class="td" style="width: 20%">{{index + 1}}</div>
+							<div class="td main" @click="parent.app.showProjectDetail(item)">{{item.name}}</div>
+							<div class="td" style="width: 20%">{{item.type}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</body>
+	
+	<script>
+		function renderItem (item) {
+			for (let i = 1; i <= 8; i++) {
+				let dom = $(`<div class="len len${i}"></div>`);
+				if (i <= 4) {
+					dom.css('width', (15 + Math.random() * 15) + 'px');
+					dom.css('height', '2px');
+				} else {
+					dom.css('height', (15 + Math.random() * 15) + 'px');
+					dom.css('width', '2px');
+				}
+				item.append(dom);
+			}
+		}
+		renderItem($('.item1'));
+		renderItem($('.item2'));
+		renderItem($('.item3'));
+	</script>
+	<script src="./js/right.js" defer></script>
+</html>
+</script>

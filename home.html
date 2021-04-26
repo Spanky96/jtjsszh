@@ -17,14 +17,14 @@
 		<script src="iframepage.js"></script>
 	</head>
 	<body>
-		<div class="container " id="app" :class="{'bgindex':activeIndex==0}">
+		<div class="container " id="app" :class="{'bgindex':activeIndex==0, mapFullScreen}">
 			<div class="navtop">
 				<div class="logo">
 					<img src="./commonnav/img/home/u486.png" alt="" srcset="">
 				</div>
 				<div class="title">
 					<div class="u16"></div>
-					<div class="u17">{{activeTitle}}</div>
+					<div class="u17" @click="changepageByName('首页')">{{title}}</div>
 				</div>
 				<div class="login">
 					<div class="avatra"><img src="./commonnav/img/home/avatar.jpg" alt="" srcset=""></div>
@@ -68,7 +68,7 @@
 								<div class="a">BIM属性</div>
 								<div class="a">二维码</div>
 								<div class="a" style="color:#FACD91">三维</div>
-								<div class="a" style="color:#FACD91">全屏</div>
+								<div class="a" style="color:#FACD91" @click="mapFullScreen=!mapFullScreen">{{mapFullScreen ? '退出': ''}}全屏</div>
 								<div class="a">返回</div>
 							</div>
 						</div>
@@ -95,6 +95,7 @@
 						midMenuActive: false,
 						navname: allpages,
 						hideAll: false,
+						mapFullScreen: false,
 						activeIndex: -1,
 						animateleft: '',
 						animatemiddle: '',
@@ -117,16 +118,6 @@
 					setInterval(() => {
 						this.systemDate = $Util.getFmtDate(new Date(), 'yyyy-MM-dd hh:mm');
 					}, 5000);
-				},
-				computed: {
-					activeTitle() {
-						if(this.activeIndex ==-1){
-							return ""
-						}else{
-							return this.activeIndex == 0 ? this.title : this.navname[this.activeIndex].name
-						}
-						
-					}
 				},
 				methods: {
 					resetpage() {

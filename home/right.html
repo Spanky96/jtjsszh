@@ -8,7 +8,9 @@
 		<link rel="stylesheet/less" href="./css/subpage.less">
 		<script src="../publicResource/less.min.js"></script>
 		<script src="../publicResource/jquery-1.11.2.min.js"></script>
+		<script src="../publicResource/echarts@5.min.js"></script>
 		<script src="../publicResource/vue.min.js"></script>
+		<script src="../publicResource/echarts-auto-tooltip.js"></script>
 	</head>
 	<body>
 		<div id="rightApp" v-cloak class="container righthome">
@@ -16,13 +18,48 @@
 				<div class="smalltitle2">
 					工程结构分布
 				</div>
-			</div>
-			<div class="item item2">
-				<div class="smalltitle2">
-					重点地址信息
+				<div class="pies">
+					<div class="chart1">
+						<div id="chartJg1" style="width: 165px;height: 180px;"></div>
+						<div class="desc">30座/22KM</div>
+					</div>
+					<div class="chart1">
+						<div id="chartJg2" style="width: 165px;height: 180px;"></div>
+						<div class="desc">2座/5KM</div>
+					</div>
+					<div class="chart1">
+						<div id="chartJg3" style="width: 165px;height: 180px;"></div>
+						<div class="desc">23KM</div>
+					</div>
 				</div>
 				<div class="smalltitle3">
 					桥梁工程数据
+				</div>
+				<div class="bridgeInfo">
+					<div class="left">
+						<span class="z">总</span>
+						<span class="n">50KM</span>
+					</div>
+					<div id="pieChartBridge" style="width: 340px;height: 195px;"></div>
+				</div>
+			</div>
+			<div class="item item2">
+				<div class="smalltitle2">
+					重点地质信息
+				</div>
+				<div class="content zddzxx">
+					<div class="lefttext">
+						<ul>
+							<li style=""><span>你的描述内容</span></li>
+							<li style=""><span>水文</span></li>
+							<li style=""><span>地质描述</span></li>
+							<li style=""><span>工点地质（右侧视频）</span></li>
+						</ul>
+					</div>
+					<div class="rightvideo">
+						<video src="./test.mp4" autoplay="autoplay" loop="loop" muted="muted" controls="controls" controlslist="nodownload" height="100%" width="100%">
+						</video>
+					</div>
 				</div>
 			</div>
 			<div class="item item3">

@@ -161,6 +161,11 @@ var  leftApp=new Vue({
 			myChart.setOption(option);
 			// myChart.resize();
 			tools.loopShowTooltip(myChart, option, { loopSeries: true });
+			setTimeout(function (){
+				window.onresize = function () {
+					myChart.resize();
+				}
+			}, 1000);
 		}
     },
 	mounted() {

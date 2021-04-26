@@ -81,15 +81,15 @@
         >.item1 {
             background: url(../../commonnav/img/home/right1.svg);
             background-size: 100% 100%;
+            height: 449px;
             width: 500px;
-            height: 185px;
         }
 
         >.item2 {
             background: url(../../commonnav/img/home/right2.svg);
             background-size: 100% 100%;
             width: 500px;
-            flex-grow: 1;
+            height: 208px;
             margin: 20px 0;
         }
 
@@ -98,6 +98,7 @@
             background-size: 100% 100%;
             width: 500px;
             height: 289px;
+            flex-grow: 1;
         }
     }
 
@@ -325,7 +326,7 @@
         border-radius: 20px 0px 0px 20px;
         right: 0px;
         line-height: 40px;
-        top: 160px;
+        top: 210px;
         text-indent: 10px;
         &::before {
             content: '◉';
@@ -361,4 +362,88 @@
         }
     }
 
+}
+#pieChartBridge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.pies {
+    height: 155px;
+    margin: 45px 0 40px;
+    display: flex;
+    justify-content: space-around;
+    .chart1 {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .desc {
+            font-weight: 700;
+            font-style: normal;
+            font-size: 26px;
+            color: #b4e4ff;
+            text-align: left;
+        }
+    }
+}
+.bridgeInfo {
+    height: 200px;
+    position: relative;
+    .left {
+        display: flex;
+        align-items: center;
+        margin-top: 40px;
+        margin-left: 10px;
+        .z {
+            color: rgb(180, 228, 255);
+            font-size: 20px;
+            border: 1px solid rgb(180, 228, 255);
+            border-radius: 5px;
+            height: 42px;
+            width: 42px;
+            display: block;
+            line-height: 42px;
+            text-align: center;
+            margin-right: 10px;
+        }
+        .n {
+            font-weight: 700;
+            font-style: normal;
+            font-size: 36px;
+            color: rgb(180, 228, 255);
+            text-align: left;
+        }
+    }
+}
+.zddzxx {
+    display: flex;
+    .lefttext {
+        width: 200px;
+        padding-top: 40px;
+        ul {
+            li {
+                font-weight: 400;
+                font-style: normal;
+                font-size: 14px;
+                color: rgb(180, 228, 255);
+                line-height: 24px;
+                &::before {
+                    content: '•';
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+    .rightvideo {
+        flex-grow: 1;
+        max-width: 300px;
+        margin-right: 5px;
+        height: 150px;
+        margin-top: 25px;
+        video {
+            // object-fit: cover;
+            background: #000;
+        }
+    }
 }

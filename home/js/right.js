@@ -118,24 +118,28 @@ var  rightApp=new Vue({
 			// 	}
 			// }, 1000);
 		},
-		pieChartJg: function (id, label, value, total) {
+		pieChartJg: function (id, value, total, color) {
 			var myChart = echarts.init(document.getElementById(id));
 			var option = {
 				grid: {
-					left: '5%',
-					right: '5%',
-					bottom: '5%',
-					top: '5%',
+					left: 0,
+					right: 0,
+					bottom: 20,
+					top: 20,
 				},
 				series: [{
 					type: 'gauge',
 					progress: {
 						show: true,
-						width: 18
+						width: 18,
+						itemStyle: {
+							color: color
+						},
 					},
 					axisLine: {
 						lineStyle: {
-							width: 18
+							width: 18,
+							color: [[1, '#092A60ee']]
 						}
 					},
 					pointer: {show: false},
@@ -158,9 +162,10 @@ var  rightApp=new Vue({
 						show: false,
 					},
 					data: [
-					{
-						value: value / total * 100
-					}]
+						{
+							value: value / total * 100
+						}
+					]
 				}]
 			};
 			myChart.setOption(option);
@@ -174,9 +179,9 @@ var  rightApp=new Vue({
 			{name: '小桥', value: 5},
 			{name: '涵洞', value: 3},
 		]);
-		this.pieChartJg('chartJg1', '桥梁工程', 22, 50);
-		this.pieChartJg('chartJg2', '隧道工程', 5, 50);
-		this.pieChartJg('chartJg3', '路基工程', 23, 50);
+		this.pieChartJg('chartJg1', 22, 50, '#70980C');
+		this.pieChartJg('chartJg2', 5, 50, '#1165B2');
+		this.pieChartJg('chartJg3', 23, 50, '#502092');
 	},
   
   });

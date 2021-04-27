@@ -54,7 +54,7 @@
 								<div class="a">地形</div>
 								<div class="a">测量</div>
 								<div class="a">BIM属性</div>
-								<div class="a">二维码</div>
+								<div class="a" @click="showQrCode">二维码</div>
 								<div class="a" style="color:#FACD91">三维</div>
 								<div class="a" style="color:#FACD91" @click="mapFullScreen=!mapFullScreen">{{mapFullScreen ? '退出': ''}}全屏</div>
 								<div class="a">返回</div>
@@ -170,6 +170,9 @@
 							}
 						}
 					},
+					showQrCode: function () {
+						window.previewImg('./commonnav/img/qrcode.png');
+					}
 				},
 
 			})

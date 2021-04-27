@@ -6,34 +6,24 @@
 		<link rel="stylesheet" type="text/css" href="publicResource/layui/css/layui.css" />
 		<link rel="stylesheet" type="text/css" href="publicResource/css/animate.min.css" />
 		<link rel="stylesheet" type="text/css" href="publicResource/css/common.css" />
-		<link rel="stylesheet/less" type="text/css" href="commonnav/css/home.less" />
+		<link rel="stylesheet/less" type="text/css" href="commonnav/css/style.less" />
 		<script src="publicResource/jquery-1.11.2.min.js"></script>
 		<script src="publicResource/layui/layui.js"></script>
-		<script src="publicResource/qs.js"></script>
-		<script src="publicResource/util.js"></script>
 		<script src="publicResource/less.min.js"></script>
 		<script src="publicResource/vue.min.js"></script>
 		<!-- <script src="global.js"></script> -->
 		<script src="iframepage.js"></script>
 	</head>
 	<body>
-		<div class="container " id="app" :class="{'bgindex':activeIndex==0, mapFullScreen}">
+		<div class="container " id="app" :class="{'bgindex':activeIndex==0}">
 			<div class="navtop">
-				<div class="logo">
-					<img src="./commonnav/img/home/u486.png" alt="" srcset="">
-				</div>
 				<div class="title">
-					<div class="u16"></div>
-					<div class="u17" @click="changepageByName('首页')">{{title}}</div>
-				</div>
-				<div class="login">
-					<div class="avatra"><img src="./commonnav/img/home/avatar.jpg" alt="" srcset=""></div>
-					<div class="welcome_text">您好， Admin</div>
-					<div class="logout"> <img src="./commonnav/img/home/u488.svg" alt=""> 退出</div>
-
+					{{activeTitle}}
 				</div>
 			</div>
-			
+			<img src="commonnav/img/back.png"  class="back" @click="resetpage()" v-show="activeIndex!=0">
+
+			<div id="traget" @click="hideAll=!hideAll"><img src="commonnav/img/target.png" alt=""></div>
 			<div class="top5" :class="{'active':midMenuActive, hide: hideAll}">
 				<div class="module" onclick="changepage('数字资产')">
 					<div>数字资产</div>
@@ -56,31 +46,9 @@
 				<iframe :src="navname[activeIndex].url" v-if="navname[activeIndex].url" :class="animatemain" class="box100"></iframe>
 				<div v-else class="box100 module3 " >
 					<iframe :src="iframeleft" :class="[animateleft,{hide: hideAll}]" class="left" :style="{'width':leftwidth}"></iframe>
-					<div class="middleBorder">
-						<div class="middle-tool">
-							<input type="text" placeholder="搜索">
-
-							<div class="btns">
-								<div class="a">漫游</div>
-								<div class="a">地图</div>
-								<div class="a">地形</div>
-								<div class="a">测量</div>
-								<div class="a">BIM属性</div>
-								<div class="a">二维码</div>
-								<div class="a" style="color:#FACD91">三维</div>
-								<div class="a" style="color:#FACD91" @click="mapFullScreen=!mapFullScreen">{{mapFullScreen ? '退出': ''}}全屏</div>
-								<div class="a">返回</div>
-							</div>
-						</div>
-						<iframe :src="iframemiddle" :class="animatemiddle" class="middle" :style="{'width':middlewidth}"></iframe>
-					</div>
+					<iframe :src="iframemiddle" :class="animatemiddle" class="middle" :style="{'width':middlewidth}"></iframe>
 					<iframe :src="iframeright" :class="[animateright,{hide: hideAll}]" class="right" :style="{'width':rightwidth}"></iframe>
 				</div>
-			</div>
-
-			<div class="bottom-status">
-				当前视口项目：{{moduleName}}   <span style="margin: 0px 20px 0 15px;">|</span>
-				当前系统时间：{{systemDate}}
 			</div>
 		</div>
 
@@ -91,11 +59,9 @@
 				data() {
 					return {
 						title: '交通建设数字化协同平台',
-						moduleName: '',
 						midMenuActive: false,
 						navname: allpages,
 						hideAll: false,
-						mapFullScreen: false,
 						activeIndex: -1,
 						animateleft: '',
 						animatemiddle: '',
@@ -106,22 +72,28 @@
 						iframeright:'',
 						leftwidth:'',
 						rightwidth:'',
-						middlewidth:'',
-						systemDate: $Util.getFmtDate(new Date(), 'yyyy-MM-dd hh:mm')
+						middlewidth:''
 					}
 				},
 				mounted() {
 					setTimeout(()=>{
 						this.midMenuActive=true;
 					},300)
-					this.resetpage();
-					setInterval(() => {
-						this.systemDate = $Util.getFmtDate(new Date(), 'yyyy-MM-dd hh:mm');
-					}, 5000);
+					this.resetpage()
+				},
+				computed: {
+					activeTitle() {
+						if(this.activeIndex ==-1){
+							return ""
+						}else{
+							return this.activeIndex == 0 ? this.title : this.navname[this.activeIndex].name
+						}
+						
+					}
 				},
 				methods: {
 					resetpage() {
-						this.changepageByName("首页");
+						this.changepageByName("数字资产");
 					},
 					showProjectDetail: function (item) {
 						this.animateleft = "fadeInRight animated";
@@ -142,7 +114,6 @@
 							console.log("请在iframepage配置跳转项")
 						} else {
 							this.activeIndex = index;
-							this.moduleName = pagename;
 							if (this.navname[index].hasOwnProperty('url')) {
 								// bounceInRight
 								this.animatemain = "slideInDown animated";
@@ -238,24 +209,6 @@
 				return null;
 			}
 		</script>
-
-		
-	<script>
-		function renderItem (item) {
-			for (let i = 1; i <= 8; i++) {
-				let dom = $(`<div class="len len${i}"></div>`);
-				if (i <= 4) {
-					dom.css('width', (15 + Math.random() * 15) + 'px');
-					dom.css('height', '2px');
-				} else {
-					dom.css('height', (15 + Math.random() * 15) + 'px');
-					dom.css('width', '2px');
-				}
-				item.append(dom);
-			}
-		}
-		renderItem($('.middleBorder'));
-	</script>
 
 	</body>
 </html>

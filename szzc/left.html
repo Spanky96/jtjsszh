@@ -8,8 +8,9 @@
 		<link rel="stylesheet/less" href="./css/leftright.less">
 		<script src="../publicResource/less.min.js"></script>
 		<script src="../publicResource/jquery-1.11.2.min.js"></script>
+		<script src="../publicResource/qs.js"></script>
+		<script src="../publicResource/util.js"></script>
 		<script src="../publicResource/vue.min.js"></script>
-		<script src="./js/left.js" defer></script>
 	</head>
 	<body>
 		<div id="leftApp" v-cloak class="container lefthome">
@@ -46,7 +47,9 @@
 				</div>
 			</div>
 			<div class="item" style="flex-grow: 1;margin-top: 20px;">
-				<video src="https://sf1-scmcdn-tos.pstatp.com/goofy/ies/douyin_home_web/medias/1-1.98effe6c.mp4" autoplay="autoplay" loop="loop" muted="muted" controls="controls" controlslist="nodownload" height="100%" width="100%">
+				<video :src="videoSrc"
+					autoplay="autoplay" loop="loop" muted="muted" controls="controls"
+				 	controlslist="nodownload" height="100%" width="100%">
 				</video>
 			</div>
 
@@ -136,5 +139,21 @@
 			</div>
 		</div>
 	</body>
+	<script>
+		var leftApp=new Vue({
+			el: '#leftApp',
+			data(){
+				return {
+					videoSrc: ''
+				}
+			},
+			mounted() {
+				this.videoSrc = decodeURIComponent($Util.getQueryString('videoSrc'));
+			},
+			methods: {
+				
+			},
+		});
+  
+	</script>
 </html>
-</script>
